@@ -1,0 +1,112 @@
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(phpqrcode/qrlib.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(phpqrcode/qrlib.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(): Failed opening 'phpqrcode/qrlib.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(database.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(database.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  include(): Failed opening 'database.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 8
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 8
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_siswa WHERE nisn=\'0043351291\'') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:8
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 9
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_fetch_array($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:9
+[02-May-2023 05:46:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 11
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 43
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 43
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_konfig') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:43
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 44
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_fetch_array($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:44
+[02-May-2023 05:46:05 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 48
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 48
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_siswa WHERE nisn=\'0043351291\'') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:48
+[02-May-2023 05:46:05 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 49
+[02-May-2023 05:46:05 UTC] PHP Stack trace:
+[02-May-2023 05:46:05 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:05 UTC] PHP   2. mysqli_num_rows($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:49
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(phpqrcode/qrlib.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(phpqrcode/qrlib.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(): Failed opening 'phpqrcode/qrlib.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 5
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(database.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(database.php): failed to open stream: No such file or directory in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  include(): Failed opening 'database.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 6
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 8
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 8
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_siswa WHERE nisn=\'0045574212\'') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:8
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 9
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_fetch_array($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:9
+[02-May-2023 05:46:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 11
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 43
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 43
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_konfig') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:43
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 44
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_fetch_array($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:44
+[02-May-2023 05:46:21 UTC] PHP Notice:  Undefined variable: db_conn in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 48
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 48
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_query($link = NULL, $query = 'SELECT * FROM data_siswa WHERE nisn=\'0045574212\'') /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:48
+[02-May-2023 05:46:21 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php on line 49
+[02-May-2023 05:46:21 UTC] PHP Stack trace:
+[02-May-2023 05:46:21 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:21 UTC] PHP   2. mysqli_num_rows($result = NULL) /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:49
+[02-May-2023 05:46:46 UTC] PHP Fatal error:  Cannot declare class qrstr, because the name is already in use in /home/k5545816/kelulusan.smkn7surakarta.sch.id/phpqrcode/qrconst.php on line 50
+[02-May-2023 05:46:46 UTC] PHP Stack trace:
+[02-May-2023 05:46:46 UTC] PHP   1. {main}() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:0
+[02-May-2023 05:46:46 UTC] PHP   2. include() /home/k5545816/kelulusan.smkn7surakarta.sch.id/wali/cetakskl.php:41
