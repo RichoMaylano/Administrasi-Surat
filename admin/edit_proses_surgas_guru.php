@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include '../database.php';
-
+$id_surat = $_POST['id_surat'];
 $no_surat = $_POST['no_surat'];
 
 $no_surat_sppd = $_POST['no_surat_sppd'];
@@ -34,22 +34,14 @@ date_default_timezone_set('Asia/Jakarta');
 $date = date("Y-m-d H:i:s");
 
 if(isset($_POST['submit'])){
-$query = mysqli_query($db_conn, "SELECT no_surat FROM surgas_guru WHERE no_surat = '$no_surat'");
-if($query->num_rows > 0) {
-    $_SESSION['id_sama'] = 'Nomor Surat Sudah Terdaftar';
-   } else {
-$sql = "INSERT INTO surgas_guru VALUES ('', '$no_surat', '$no_surat_sppd', '$tujuan_sppd', '$tempat_sppd', '$mata_anggaran','$nama_guru', '$nip_guru', '$pangkat_guru', 
-'$golongan_guru', '$jabatan', '$dasar_surat', '$isi_surat', '$tgl_kegiatan', '$mulai_kegiatan', '$sampai_kegiatan',
-'$tgl_selesai', '$tgl_pembukaan', '$jam_pembukaan', '$tgl_penutupan', '$jam_penutupan',
-'$tempat', '$jalan', '$jenis_surgas', '$date')";
-$result = mysqli_query($db_conn, $sql);
-if(!$result){ 
-   die('Could not update data: '.  mysqli_error()); 
-} else{ 
-    $_SESSION['add_msg'] = 'Data berhasil ditambahkan';
-} 
-} 
-} 
- 
-header("location: surgas_guru.php");
-?>
+    $sql = "UPDATE surgas_guru SET no_surat='$no_surat', no_surat_sppd='$no_surat_sppd', tujuan_sppd='$tujuan_sppd',tempat_sppd='$tempat_sppd',mata_anggaran='$mata_anggaran',nama_guru='$nama_guru',nip_guru='$nip_guru',pangkat_guru='$pangkat_guru',golongan_guru='$golongan_guru',jabatan='$jabatan',dasar_surat='$dasar_surat',isi_surat='$isi_surat',tgl_kegiatan='$tgl_kegiatan',mulai_kegiatan='$mulai_kegiatan',sampai_kegiatan='$sampai_kegiatan',tgl_selesai='$tgl_selesai',tgl_pembukaan='$tgl_pembukaan',jam_pembukaan='$jam_pembukaan',tgl_penutupan='$tgl_penutupan',jam_penutupan='$jam_penutupan',tempat='$tempat',jalan='$jalan',jenis_surgas='$jenis_surgas',tgl_create='$date' WHERE id_surat='$id_surat'";
+    $result = mysqli_query($db_conn, $sql);
+    if(!$result){ 
+       die('Could not update data: '.  mysqli_error()); 
+    } else{ 
+        $_SESSION['edit_msg'] = 'Data berhasil diupdate';
+    } 
+    } 
+     
+    header("location: surgas_guru.php");
+    ?>

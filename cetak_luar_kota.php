@@ -164,7 +164,13 @@ echo '<tr style="font-size:16px;">
 <td></td>
   <td>Pangkat/Gol. Ruang</td>
   <td>:</td>
-  <td>'.$data['pangkat_guru'].'/'.$data['golongan_guru'].'</td>
+  <td>';
+  if($data['pangkat_guru'] == '-' && $data['golongan_guru'] == '-'){
+    echo '-';
+  }else{
+  echo ' '.$data['pangkat_guru'].'/'.$data['golongan_guru'].' ';
+  }
+  echo '</td>
 </tr>';
 
 echo '<tr style="font-size:16px;">
