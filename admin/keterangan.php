@@ -219,7 +219,7 @@ include '_header.php';
 					echo '<td>'.indo($data['tgl_create']).'</td>';
 					echo '<td>
 					<div class="btn-group">
-  					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+  					<button type="button" class="btn btn-warning text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					Aksi
 					</button> 
   					<ul class="dropdown-menu">

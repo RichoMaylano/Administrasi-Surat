@@ -19,7 +19,7 @@ include '_header.php';
 <div class="col-xl-12 col-sm-12 mb-3">
 <div class="card o-hidden h-100" >
 <div class="card-header clearfix small z-1 text-white" href="#" style="background-color: #00AA9E;">
-<span class="float-left"><img src="../SMKN7.png" alt="" width="2%"> &nbspSMK NEGERI 7 SURAKARTA
+<span class="float-left"><img src="../SMKN7.png" alt="" width="50px"> &nbspSMK NEGERI 7 SURAKARTA
 </div>
 <div class="card-body text-white" style="background-color: #00C4B6;">
 <div class="card-body-icon">

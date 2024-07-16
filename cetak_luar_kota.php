@@ -10,8 +10,8 @@
     $a = mysqli_query($db_conn,"SELECT * FROM surgas_guru WHERE no_surat='$no_surat'");
     $data = mysqli_fetch_array($a);
     ?>
-    <title>Surat Tugas Guru (Luar Kota) - <?php echo $data['nama_guru'];?> - <?php echo $data['nip_guru'];?></title>
-<style>
+    <title>Surat Tugas Guru (Luar Kota) - 094/<?php echo $data['no_surat'];?> - <?php echo $data['nama_guru'];?> - <?php echo $data['nip_guru'];?></title>
+    <style>
     @media print
 {    
     .no-print, .no-print *

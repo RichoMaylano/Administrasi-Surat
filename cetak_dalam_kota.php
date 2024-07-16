@@ -10,7 +10,7 @@
     $a = mysqli_query($db_conn,"SELECT * FROM surgas_guru WHERE no_surat='$no_surat'");
     $data = mysqli_fetch_array($a);
     ?>
-    <title>Surat Tugas Guru (Luar Kota) - <?php echo $data['nama_guru'];?> - <?php echo $data['nip_guru'];?></title>
+    <title>Surat Tugas Guru (Dalam Kota) - 094/<?php echo $data['no_surat'];?> - <?php echo $data['nama_guru'];?> - <?php echo $data['nip_guru'];?></title>
 <style>
     @media print
 {    
@@ -206,30 +206,74 @@ $hari = array ( 1 =>    'Senin',
 			'Minggu'
 		);
   $tgl = date('N', strtotime($data['tgl_kegiatan']));
+  $tgl2 = date('N', strtotime($data['tgl_selesai']));
 
+if($data['tgl_selesai'] == '0000-00-00'){
+    echo '<tr style="font-size:16px;">
+    <td></td>
+    <td></td>
+    <td>Hari / Tanggal</td>
+    <td>:</td>
+    <td>'.$hari[$tgl].', '.tgl_indo($data['tgl_kegiatan']).'</td>
+    </tr>';
+} else {
+    echo '<tr style="font-size:16px;">
+    <td></td>
+    <td></td>
+    <td>Hari / Tanggal</td>
+    <td>:</td>
+    <td>'.$hari[$tgl].' s.d. '.$hari[$tgl2].', '.tgl_indo($data['tgl_kegiatan']).' s.d. '.tgl_indo($data['tgl_selesai']).'</td>
+    </tr>';
+}
 
-echo '<tr style="font-size:16px;">
-<td></td>
-<td></td>
-  <td>Hari / Tanggal</td>
-  <td>:</td>
-  <td>'.$hari[$tgl].', '.tgl_indo($data['tgl_kegiatan']).'</td>
-</tr>';
-
-echo '<tr style="font-size:16px;">
-<td></td>
-<td></td>
-  <td>Waktu</td>
-  <td>:</td>
-  <td>Pukul '.$data['mulai_kegiatan'].' WIB - '.$data['sampai_kegiatan'].'</td>
-</tr>';
+if($data['mulai_kegiatan'] == '' && $data['sampai_kegiatan'] == ''){
+    echo '<tr style="font-size:16px;">
+    <td></td>
+    <td></td>
+    <td>Pembukaan</td>
+    <td>:</td>
+    <td>'.$hari[$tgl].', '.tgl_indo($data['tgl_kegiatan']).', Pukul '.$data['jam_pembukaan'].'</td>
+    </tr>';
+    
+    echo '<tr style="font-size:16px;">
+    <td></td>
+    <td></td>
+    <td>Penutupan</td>
+    <td>:</td>
+    <td>'.$hari[$tgl2].', '.tgl_indo($data['tgl_selesai']).', Pukul '.$data['jam_penutupan'].'</td>
+    </tr>';
+}else {
+    if($data['sampai_kegiatan'] == 'Selesai' || $data['sampai_kegiatan'] == 'selesai'){
+        echo '<tr style="font-size:16px;">
+        <td></td>
+        <td></td>
+        <td>Waktu</td>
+        <td>:</td>
+        <td>Pukul '.$data['mulai_kegiatan'].' WIB - '.$data['sampai_kegiatan'].'</td>
+        </tr>';
+    } else {
+        echo '<tr style="font-size:16px;">
+        <td></td>
+        <td></td>
+        <td>Waktu</td>
+        <td>:</td>
+        <td>Pukul '.$data['mulai_kegiatan'].' - '.$data['sampai_kegiatan'].' WIB</td>
+        </tr>';
+    }
+}
 
 echo '<tr style="font-size:16px; vertical-align: text-top;">
 <td></td>
 <td></td>
   <td>Tempat</td>
   <td>:</td>
-  <td><b>'.$data['tempat'].'</b> <br> '.$data['jalan'].'</td>
+  <td><b>'.$data['tempat'].'</b> <br>';
+  if($data['jalan'] == '-' || $data['jalan'] == ''){
+ echo '';
+  }else{
+    echo $data['jalan'];
+  }
+   echo '</td>
 </tr>';
 
     
@@ -306,7 +350,7 @@ if($data['nama_guru'] == 'Wardoyo, S.Pd., M.Pd'){
       <td width="400">
       <br><br>
         Ditetapkan di &nbsp: Surakarta<br>
-        pada tanggal &nbsp: '.tgl_indo($tanggal).'<br>
+        pada tanggal &nbsp&nbsp: 15 Juli 2024<br>
         Kepala Sekolah
         <br><br><br><br><br><br>
         <b>'.$hsl['nama_kepsek'].'</b>
