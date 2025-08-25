@@ -29,7 +29,6 @@ include '_header.php';
 			<select class="form-select" aria-label="Default select example" name="value">
 				<option value="all">Semua Angkatan</option>
 				<option disabled>-----------------------------</option>
-				<option value="2021/2022">Tahun Ajaran 2021/2022</option>
 				<option value="2022/2023">Tahun Ajaran 2022/2023</option>
 				<option value="2023/2024">Tahun Ajaran 2023/2024</option>
 				<option value="2024/2025">Tahun Ajaran 2024/2025</option>
@@ -46,11 +45,7 @@ include '_header.php';
             <table id="example" class="table" style="width:100%">
 			<?php
 				if(isset($_POST['value'])){
-				if($_POST['value'] == '2021/2022') {
-					// query to get all Doe records
-					$query = "SELECT * FROM data_siswa WHERE tahun_ajaran='2021/2022'";
-				}
-				elseif($_POST['value'] == '2022/2023') {
+				if($_POST['value'] == '2022/2023') {
 					// query to get all Doe records
 					$query = "SELECT * FROM data_siswa WHERE tahun_ajaran='2022/2023'";
 				}

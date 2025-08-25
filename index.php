@@ -1,155 +1,368 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Form Login | Admin</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="SMKN7.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="Form_Login/Login/css/main.css">
-<!--===============================================================================================-->
-</head>
 <?php
-include "database.php";
-$que = mysqli_query($db_conn, "SELECT * FROM data_konfig");
-$hsl = mysqli_fetch_array($que);
+include 'database.php';
+session_start();
+ 
+if (isset($_SESSION['username'])) {
+    header("Location: ./");
+    exit();
+}
+ 
+if (isset($_POST['submit'])) {
+    $username = mysqli_real_escape_string($db_conn, $_POST['username']);
+    $password = MD5($_POST['password']); // Hash the input password using SHA-256
+ 
+    $sql = "SELECT * FROM data_admin WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($db_conn, $sql);
+ 
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date("H:i:s");
+    if ($result->num_rows > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['id_user'] = $row['UID'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+        $_SESSION['pesan'] = 'Selamat Datang';
+        mysqli_query($db_conn, "UPDATE data_admin SET status_login = '1', sesi_login = '$date'  WHERE username = '$username'");
+        $_SESSION['status_login'] = $row['status_login'];
+        
+        $_SESSION['sesi_login'] = $row['sesi_login'];
+        header("Location: admin/");
+        exit();
+    } else {
+        echo "<script>alert('Email atau password Anda salah. Silakan coba lagi!')</script>";
+    }
+}
 ?>
-<?php
-	if(isset($_REQUEST['submit'])){
-		$username = $_REQUEST['username'];
-        $username = preg_replace('/[^a-zA-Z0-9]/', '', $username);
-		$password = MD5($_REQUEST['password']);
-		
-		$hasil = mysqli_query($db_conn,"SELECT * FROM data_admin WHERE username='$username' AND password='$password'");
-			if(mysqli_num_rows($hasil) > 0){
-				session_start();
-				$data = mysqli_fetch_array($hasil);
-				$_SESSION['logged'] = $data['UID'];
-				$_SESSION['username'] = $data['username'];
-				$_SESSION['nama_lengkap'] = $data['nama_lengkap'];
-				$_SESSION['message'] = 'Selamat Datang';
-                /* jika fungsi: 
-                        header('Location: ./'); 
-                   tidak bisa digunakan, HAPUS atau berikan tanda komentar
-                   kemudian aktifkan (hapus tanda //) pada skrip: 
-                        echo '<script>window.location("./");</script>';
-                */
-				header('Location: admin/./');
-                //echo '<script>window.location("./");</script>';
-			} else {
-				echo '<script>alert("Username dan Password tidak sesuai!");</script>';
-			}
-	} ?>
 
-<body style="background-color: #666666;">
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-                <form class="login100-form validate-form">
-                    <div class="text-center"><img src="SMKN7.png" alt="" width="150px"></div>
-                    <br>
-					<span class="login100-form-title p-b-43">
-						<b>WEBSITE ADMINISTRASI SURAT<br> <?= $hsl['sekolah'] ?></b>
-					</span>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="username" id="inputUsername">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Username</span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" id="inputPassword">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
+<!doctype html>
+<html lang="zxx">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Axoma">
+    <meta name="keywords" content="Axoma">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Aplikasi Administrasi Persuratan</title>
+    <link rel="icon" href="assets/images/SMKN7.png">
+    <link href="assets/Axoma/static\plugin\bootstrap\css\bootstrap.min.css" rel="stylesheet">
+    <link href="assets/Axoma/static\plugin\font-awesome\css\fontawesome-all.min.css" rel="stylesheet">
+    <link href="assets/Axoma/static\plugin\et-line\style.css" rel="stylesheet">
+    <link href="assets/Axoma/static\plugin\themify-icons\themify-icons.css" rel="stylesheet">
+    <link href="assets/Axoma/static\plugin\owl-carousel\css\owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/Axoma/static\plugin\magnific\magnific-popup.css" rel="stylesheet">
+    <link href="assets/Axoma/static\css\style.css" rel="stylesheet">
+    <link href="assets/Axoma/static\css\color\default.css" rel="stylesheet" id="color_theme">
+  </head>
 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
+  <body data-spy="scroll" data-target="#navbar" data-offset="98">
+    <script type="text/javascript" src="assets/Axoma/md5.js"></script>
+    <script type="text/javascript">
+        function doLogin() {
+      document.sendin.username.value = document.login.username.value;
+      document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+      document.sendin.submit();
+      return false;
+        }
+    //-->
+    </script>
 
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
-			
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="submit" name="submit">
-							Login
-						</button>
-					</div>
-					
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-                            &copy; 2024 &middot; Richo Maylano Yozienanda
-						</span>
-					</div>
+    <div id="loading">
+      <div class="load-circle"><span class="one"></span></div>
+    </div>
+    <header>
+      <nav class="navbar header-nav navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img class="light-logo" src="assets/Axoma/static\img\logo-light.svg" title="" alt="">
+            <img class="dark-logo" src="assets/Axoma/static\img\logo.svg" title="" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span></span>
+              <span></span>
+              <span></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbar">
+            <ul class="navbar-nav ml-auto align-items-center">
+              <li><a class="nav-link" href="#home">Home</a></li>
+              <li><a class="nav-link" href="#service">Service</a></li>
+              <li><a class="nav-link" href="#price">Creator</a></li>
+              <li><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav> 
+    </header>
+    <main>
+      <section id="home" class="home-banner-03 theme-bg bg-effect-box">
+        <div class="bg-effect bg-cover" style="background-image: url(assets/Axoma/static/img/banner-effect-6.svg);"></div>
+        <div id="particles_effect" class="particles-effect"></div>
+        <div class="container">
+          <div class="row align-items-center justify-content-center p-100px-tb sm-p-60px-b">
+            <div class="col-lg-5 md-p-30px-tb">
+              <h5 class="white-color">RMY</h5>
+              <h1 class="font-alt white-color">Login Page</h1>
+              <p class="white-color-light">Login to Aplikasi Persuratan</p>
+              <div class="subscribe-block">
+                  <div class="card-block py-lg px-md">
 
-					<!-- <div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
+                    <form id="loginForm" class="md-form form-light" role="form" action="index.php" method="post">
+                        <input type="hidden" name="dst" value="$(link-orig)"/>
+                        <input type="hidden" name="popup" value="true"/>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputUser" class="form-label">Username</label>
+                            <div class="md-form-line-wrap">
+                              <input id="username" type="text" name="username" placeholder="Username" class="form-control" autofocus required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <div class="md-form-line-wrap">
+                              <input id="password" type="password" name="password" placeholder="Password" class="form-control" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                          </div>
+                        </div></br>
+                        <div class="col-md-12">
+                            <button type="submit" name="submit" class="btn btn-block btn-light"><span class="btn-elem-wrap"><span class="text" style="color: darkblue">LOGIN</span></span></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                <label>Developed by <strong>R</strong><small>icho</small> <strong>M</strong><small>aylano</small> <strong>Y</strong><small>ozienanda</small></label>
+              </div>
+            </div> 
+            <div class="col-lg-7 text-center p-50px-l">
+              <img src="assets/Axoma/static\img\home-banner-7.svg" title="" alt="">
+            </div>
+          </div> 
+        </div>
+      </section>
 
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div> -->
-				</form>
+      <section id="service" class="section">
+        <div class="container">
+          <div class="row m-45px-b sm-m-25px-b">
+            <div class="col-lg-5 col-md-10">
+              <div class="section-title-01">
+                <h2 class="dark-color font-alt">Layanan Administrasi</h2>
+              </div>
+            </div>
+          </div>
+          
+            <div class="row">
+              <div class="col-lg-4 col-md-6 m-15px-tb">
+                <div class="feature-box-02 text-center">
+                  <div class="icon theme-after">
+                    <i class="ti-check-box theme-bg"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h5 class="font-alt dark-color">Surat Tugas Guru & Siswa</h5>
+                    <p>Surat Perintah Tugas yang ditujukan kepada Guru maupun Siswa seperti Surat SPPD Dinas Luar Kota maupun Dalam Kota</p>
+                  </div>
+                  <a class="link yellow-bg-after" href="#contact"><i class="yellow-bg ti-arrow-right"></i></a>
+                </div>
+              </div> 
 
-				<div class="login100-more" style="background-image: url('Surat.png');">
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
+              <div class="col-lg-4 col-md-6 m-15px-tb">
+                <div class="feature-box-02 text-center">
+                  <div class="icon theme-after">
+                    <i class="ti-rocket theme-bg"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h5 class="font-alt dark-color">Surat Keterangan & Rekomendasi Siswa</h5>
+                    <p>Surat Keterangan mengenai persyaratan pengajuan KIP, Surat Rekomendasi mengikuti Lomba</p>
+                  </div>
+                  <a class="link yellow-bg-after" href="#contact"><i class="yellow-bg ti-arrow-right"></i></a>
+                </div>
+              </div> 
 
-	
-	
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/bootstrap/js/popper.js"></script>
-	<script src="Form_Login/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="Form_Login/Login/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="Form_Login/Login/js/main.js"></script>
+              <div class="col-lg-4 col-md-6 m-15px-tb">
+                <div class="feature-box-02 text-center">
+                  <div class="icon theme-after">
+                    <i class="ti-headphone theme-bg"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h5 class="font-alt dark-color">Surat Kunjungan Rumah (Homevisit) & Panggilan Orang Tua</h5>
+                    <p>Ditujukan kepada Guru BK dan Wali Kelas maupun Wali Siswa untuk membicarakan perkembangan belajar Siswa</p>
+                  </div>
+                  <a class="link yellow-bg-after" href="#contact"><i class="yellow-bg ti-arrow-right"></i></a>
+                </div>
+              </div> 
 
-</body>
+              </div> 
+            </div> 
+        </div>
+      </section>
+
+      <section id="price" class="section shapes-section gray-bg">
+        <div class="container">
+            <div class="row m-45px-b sm-m-25px-b">
+                <div class="col-lg-5 col-md-10">
+                  <div class="section-title-01">
+                    <h2 class="dark-color font-alt">Creator</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+             
+            <div class="col-lg-12">
+              <div class="contact-info theme-bg">
+                <div class="row">
+               
+                <div class="col-lg-1">
+                <img src="assets/images/richo.jpg" style="border-radius: 50%;" width="50px">
+                </div>
+             
+                <div class="col-lg-8">
+              <h6 class="white-color font-alt">Richo Maylano Yozienanda</h6>
+              <p class="white-color">as Software Developer & Creator</p>
+              </div>
+              
+              <div class="col-lg-3">
+              <a href="https://ochitechno.blogspot.com/" class="btn btn-t-white">Selengkapnya</a>
+              </div>
+
+              </div> 
+              </div>
+            </div>
+
+            
+
+            <div class="col-lg-12">
+              <div class="contact-info">
+                <div class="row">
+               
+                <div class="col-lg-1">
+                <img src="assets/images/img_avatar.png" style="border-radius: 50%;" width="50px">
+                </div>
+             
+                <div class="col-lg-8">
+              <h6 class="dark-color font-alt">Gunadi</h6>
+              <p>as Staff</p>
+              </div>
+              
+
+              </div> 
+              </div>
+            </div>
+
+          </div>
+        </div> 
+
+        <div class="shapes-box">
+          <span data-parallax='{"x": 150, "y": -20, "rotateZ":500}'>
+              <img src="assets/Axoma/static\img\fl-shape-1.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": 250, "y": 150, "rotateZ":500}'>
+              <img src="assets/Axoma/static\img\fl-shape-2.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": -180, "y": 80, "rotateY":2000}'>
+              <img src="assets/Axoma/static\img\fl-shape-3.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": -20, "y": 180}'>
+              <img src="assets/Axoma/static\img\fl-shape-4.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": 300, "y": 70}'>
+              <img src="assets/Axoma/static\img\fl-shape-5.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": 250, "y": 180, "rotateZ":1500}'>
+              <img src="assets/Axoma/static\img\fl-shape-6.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": 180, "y": 10, "rotateZ":2000}'>
+              <img src="assets/Axoma/static\img\fl-shape-7.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": 60, "y": -100}'>
+              <img src="assets/Axoma/static\img\fl-shape-9.png" title="" alt="">
+          </span>
+          <span data-parallax='{"x": -30, "y": 150, "rotateZ":1500}'>
+              <img src="assets/Axoma/static\img\fl-shape-10.png" title="" alt="">
+          </span>
+      </div>
+      </section>
+
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="row m-45px-b sm-m-25px-b">
+            <div class="col-lg-5 col-md-10">
+              <div class="section-title-01">
+                <h2 class="dark-color font-alt">Kontak</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            
+            <div class="col-lg-12">
+              <div class="contact-info">
+                  <i class="theme-color ti-location-pin"></i>
+                  <h6 class="dark-color font-alt"> Alamat</h6>
+                  <p>Jl. A. Yani No.374, Kerten, Kec. Laweyan, Kota Surakarta, Jawa Tengah 57143</p>
+              </div>
+              <div class="contact-info">
+                <i class="theme-color ti-mobile"></i>
+                <h6 class="dark-color font-alt">Telepon</h6>
+                <p>+62856 0024 2904</p>
+              </div>
+              <div class="contact-info">
+                  <i class="theme-color ti-email"></i>
+                  <h6 class="dark-color font-alt">Email</h6>
+                  <p>maylanoricho@gmail.com</p>
+              </div>
+            </div>
+          </div>
+
+          
+        </div> 
+      </section>
+
+    </main>
+    <footer class="footer footer-dark">
+      <div class="footer-copy">
+        <div class="row">
+          <div class="col-12">
+            <p>Developed by <strong>Richo Maylano Yozienanda</strong> | Copyright © 2024 - All Rights Reserved.</p>
+          </div>
+        </div> 
+      </div>
+    </footer>
+    
+    <script src="assets/Axoma/static\js\jquery-3.2.1.min.js"></script>
+    <script src="assets/Axoma/static\js\jquery-migrate-3.0.0.min.js"></script>
+    <script src="assets/Axoma/static\plugin\appear\jquery.appear.js"></script>
+    <script src="assets/Axoma/static\plugin\bootstrap\js\popper.min.js"></script>
+    <script src="assets/Axoma/static\plugin\bootstrap\js\bootstrap.js"></script>
+    <script src="assets/Axoma/static\plugin\particles\particles.min.js"></script>
+    <script src="assets/Axoma/static\plugin\particles\particles-app.js"></script>
+    <script src="assets/Axoma/static\js\jquery.parallax-scroll.js"></script>
+    <script src="assets/Axoma/static\js\custom.js"></script>
+
+    <script type="text/javascript" src="assets/Axoma/md5.js"></script>
+    <script type="text/javascript">
+        $('#loginForm').submit(function () {
+            var password = $('#inputPassword');
+            password.val(hexMD5('$(chap-id)' + password.val() + '$(chap-challenge)'));
+        });
+    </script>
+    <script>
+      $("#menu-toggle").click(function (e) {
+          e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+    <script type="text/javascript">
+    <!--
+      document.login.username.focus();
+    //-->
+    </script>
+
+  </body>
 </html>

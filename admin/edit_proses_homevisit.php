@@ -18,6 +18,8 @@ $pangkat_bk = $_POST['pangkat_bk'];
 $golongan_bk = $_POST['golongan_bk'];
 $tgl_kunjungan = $_POST['tgl_kunjungan']; 
 $jam_kunjungan = $_POST['jam_kunjungan'];
+$status_cetak = $_POST['status_cetak'];
+$pejabat_ttd = $_POST['pejabat_ttd'];
 date_default_timezone_set('Asia/Jakarta');
 $tgl_create = date("Y-m-d");
 $tgl_buat = date("Y-m-d H:i:s");
@@ -37,18 +39,19 @@ pangkat_walikelas='$pangkat_walikelas',
 golongan_walikelas='$golongan_walikelas', 
 pangkat_bk='$pangkat_bk', 
 golongan_bk='$golongan_bk',
-tgl_kunjungan=' $tgl_kunjungan ', 
-jam_kunjungan=' $jam_kunjungan ', 
-tgl_create='$tgl_create', 
-tgl_buat='$tgl_buat'
+tgl_kunjungan='$tgl_kunjungan', 
+jam_kunjungan='$jam_kunjungan', 
+status_cetak='$status_cetak', 
+pejabat_ttd='$pejabat_ttd', 
+tgl_create='$tgl_create'
 WHERE id_surat='$id_surat'";
 $result = mysqli_query($db_conn, $sql);
 if(!$result){ 
    die('Could not update data: '.  mysqli_error()); 
 } else{ 
-    $_SESSION['edit_msg'] = 'Data berhasil diupdate';
+    $_SESSION['msg'] = '<strong>DATA BERHASIL DIUPDATE !</strong>';
 } 
 } 
  
-header("location: homevisit.php");
+header("location: surat_homevisit.php");
 ?>

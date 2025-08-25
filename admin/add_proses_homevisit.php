@@ -18,16 +18,19 @@ $pangkat_bk = $_POST['pangkat_bk'];
 $golongan_bk = $_POST['golongan_bk'];
 $tgl_kunjungan = $_POST['tgl_kunjungan']; 
 $jam_kunjungan = $_POST['jam_kunjungan'];
+$status_cetak = $_POST['status_cetak'];
+$pejabat_ttd = $_POST['pejabat_ttd'];
 date_default_timezone_set('Asia/Jakarta');
 $tgl_create = date("Y-m-d");
 $tgl_buat = date("Y-m-d H:i:s");
+$creator = $_SESSION['nama_lengkap'];
 
 if(isset($_POST['submit'])){
 $query = mysqli_query($db_conn, "SELECT no_surat FROM homevisit WHERE no_surat = '$no_surat'");
 if($query->num_rows > 0) {
     $_SESSION['id_sama'] = 'Nomor Surat Sudah Terdaftar';
    } else {
-$sql = "INSERT INTO homevisit(id_surat, no_surat, nama_lengkap, nama_ayah, nama_ibu, kelas, alamat, nama_walikelas, nama_bk, nip_walikelas, nip_bk, pangkat_walikelas, golongan_walikelas, pangkat_bk, golongan_bk, tgl_kunjungan, jam_kunjungan, tgl_create, tgl_buat) VALUES ('',
+$sql = "INSERT INTO homevisit(id_surat, no_surat, nama_lengkap, nama_ayah, nama_ibu, kelas, alamat, nama_walikelas, nama_bk, nip_walikelas, nip_bk, pangkat_walikelas, golongan_walikelas, pangkat_bk, golongan_bk, tgl_kunjungan, jam_kunjungan, status_cetak, pejabat_ttd, tgl_create, tgl_buat, creator) VALUES ('',
  '$no_surat', 
  '$nama_lengkap', 
  '$nama_ayah', 
@@ -44,16 +47,19 @@ $sql = "INSERT INTO homevisit(id_surat, no_surat, nama_lengkap, nama_ayah, nama_
  '$golongan_bk',
  '$tgl_kunjungan',
  '$jam_kunjungan',
+ '$status_cetak',
+ '$pejabat_ttd',
  '$tgl_create',
- '$tgl_buat')";
+ '$tgl_buat',
+ '$creator')";
 $result = mysqli_query($db_conn, $sql);
 if(!$result){ 
    die('Could not update data: '.  mysqli_error()); 
 } else{ 
-    $_SESSION['add_msg'] = 'Data berhasil ditambahkan';
+    $_SESSION['msg'] = '<strong>DATA BERHASIL DITAMBAHKAN !</strong>';
 } 
 } 
 } 
  
-header("location: homevisit.php");
+header("location: surat_homevisit.php");
 ?>

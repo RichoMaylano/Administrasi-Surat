@@ -5,9 +5,9 @@ include '../database.php';
 $id_surat = $_GET['id_surat'];
 $sql = "DELETE FROM homevisit WHERE id_surat = '$id_surat'";
 if (mysqli_query($db_conn, $sql)) {
-    $_SESSION['del_msg'] = 'Data berhasil dihapus';
+    $_SESSION['msg'] = '<strong>DATA BERHASIL DIHAPUS !</strong>';
 } else {
     echo "Error deleting record: " . mysqli_error($db_conn);
 }
-header("location: homevisit.php");
+header("location: surat_homevisit.php");
 ?>

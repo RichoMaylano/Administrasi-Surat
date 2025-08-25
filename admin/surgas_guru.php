@@ -378,7 +378,7 @@ include '_header.php';
 ?>
 
 <!-- Table -->
-	  <div style="overflow:none">
+	  <div style="overflow:auto">
             <table id="example" class="table" style="width:100%">
         <thead>
             <tr>
@@ -388,6 +388,7 @@ include '_header.php';
                 <th>Pangkat / Golongan</th>
                 <th>Jenis Surat Tugas</th>
                 <th>Tanggal</th>
+                <th>Pembuat Surat</th>
                 <th></th>
             </tr>
         </thead>
@@ -403,10 +404,11 @@ include '_header.php';
 					echo '<td>'.$data['nama_guru'].'<br><b>NIP. '.$data['nip_guru'].'</b></td>';
 					echo '<td>'.$data['pangkat_guru'].' / '.$data['golongan_guru'].'</td>';
 					echo '<td>'.$data['jenis_surgas'].'</td>';
-					echo '<td>'.indo($data['tgl_create']).'</td>';
+					echo '<td>'.tgl_indo($data['tgl_create']).'</td>';
+					echo '<td>'.$data['creator'].'</td>';
 					echo '<td>
 					<div class="btn-group">
-  					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+  					<button type="button" class="btn btn-warning text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					Aksi
 					</button> 
   					<ul class="dropdown-menu">';
@@ -448,7 +450,7 @@ include '_header.php';
 		$tgl2 = date('N', strtotime($data['tgl_penutupan']));
 		?>
 		<i><strong><h5>Surat Tugas <?php echo $data['jenis_surgas']?></h5></strong></i><hr>
-	  <strong><?php echo $data['nama_guru']?> <br>NIP. <?php echo $data['nip_guru']?> - <?php echo $data['pangkat_guru']?>/<?php echo $data['golongan_guru']?></strong><hr>
+	  <strong><?php echo $data['nama_guru']?> <br>NIP. <?php echo $data['nip_guru']?> - <?php echo $data['pangkat_guru']?>/<?php echo $data['golongan_guru']?></strong><br><button type="button" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i> &nbspSudah Cetak</button><hr>
 	  <strong>Jabatan : </strong><?php echo $data['jabatan']?><br>
 	  <strong>Dasar Surat : </strong><?php if($data['dasar_surat'] == ''){?>
 		<i class="text-danger">Tidak Ada Dasar Surat</i>
@@ -473,7 +475,14 @@ include '_header.php';
 	  <?php if($data['tgl_selesai'] == '0000-00-00'){?>
 	  <strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?><br>
 	  <?php }else{?>
-		<strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?> s.d. <?php echo $hari[$tgl2]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?> s.d. <?php echo tgl_indo($data['tgl_penutupan'])?><br>
+		<strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?> s.d. <?php echo $hari[$tgl2]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?> s.d. 
+		<?php if($data['tgl_penutupan'] == '0000-00-00'){
+			echo tgl_indo($data['tgl_selesai']);
+		}else if($data['tgl_selesai'] == '0000-00-00'){ 
+			 echo tgl_indo($data['tgl_penutupan']);
+		}else{
+			echo tgl_indo($data['tgl_penutupan']);
+		}?><br>
 	  <?php }?>
 	  <?php if($data['mulai_kegiatan'] == '' && $data['sampai_kegiatan'] == ''){?>
 		<strong>Pembukaan : </strong><?php echo $hari[$tgl]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?>, Pukul <?php echo $data['jam_pembukaan']?><br>
@@ -486,8 +495,13 @@ include '_header.php';
 		<?php }?>
 	<?php }?>
 		<strong>Tempat Kegiatan : </strong><?php echo ($data['tempat'])?><br>
-		<strong>Jalan : </strong><?php echo ($data['jalan'])?><br>
-
+		
+		<?php if($data['jalan'] == '' || $data['jalan'] == '-'){
+		echo '';
+		} else {
+			echo '<strong>Jalan : </strong>'.$data['jalan'];
+		}?><br>
+		
 
 </div>
 	  
@@ -572,30 +586,29 @@ include '_header.php';
         </div>
 
 		<!-- Nama Lengkap -->
-        <h6 class="m-0 font-weight-bold mb-3">6. Nama Lengkap</h6>
+        <h6 class="m-0 font-weight-bold mb-3">2. Nama Lengkap</h6>
 	     <div class="form-group row">
 			<div class="form-group mb-3">
-			<select id="guru2" class="form-control" name="nama_guru">
-			<option value="<?php echo $data['nama_guru'] ?>" readonly selected><?php echo $data['nama_guru'] ?> - <?php echo $data['nip_guru'] ?></option>
-			<option value="" disabled>----------------------------------------------------------------------------------------------------------------</option>
+			<select id="nama_guru2" class="form-control" name="nama_guru">
+			<option value="<?php echo $data['nama_guru'] ?>" readonly selected><?php echo $data['nama_guru'] ?>- <?php echo $data['nip_guru'] ?></option>
+			<option value="" disabled>--- Pilih Nama Guru / Karyawan ---</option>
 				<?php 
-				$data2 = mysqli_query($db_conn,"select * from data_guru");
-				while($d2 = mysqli_fetch_array($data2)){
+				$q2 = mysqli_query($db_conn,"select * from data_guru");
+				while($r2 = mysqli_fetch_array($q2)){
 					?>
-					<option value="<?php echo $d['nama_guru'] ?>"><?php echo $d2['nama_guru'] ?> - <?php echo $d2['nip_guru'] ?> - <?php echo $d2['pangkat_guru'] ?>/<?php echo $d2['golongan_guru'] ?></option>
+					<option value="<?php echo $r2['nama_guru'] ?>"><?php echo $r2['nama_guru'] ?> - <?php echo $r2['nip_guru'] ?> - <?php echo $r2['pangkat_guru'] ?>/<?php echo $r2['golongan_guru'] ?></option>
 					<?php
 				}
 				?>				
 			</select>
-			</div>
         </div>
-
+        </div>
 		
          <!-- NIP -->
          <h6 class="m-0 font-weight-bold mb-3">7. NIP</h6>
 	     <div class="form-group row">
 			<div class="form-group mb-3">
-				<input type="text" name="nip_guru" class="form-control" id="nip_guru2" value="<?php echo $data['nip_guru']?>" readonly>
+				<input type="text" name="nip_guru" class="form-control" id="nip_guru2" value="<?php echo $data['nip_guru']?>">
 			</div>
         </div>
      
@@ -613,15 +626,16 @@ include '_header.php';
     <div class="form-group row">
 		<div class="col-sm-6">
 			<div class="form-group mb-3">
-					<input type="text" name="pangkat_guru" class="form-control" id="pangkat_guru2" value="<?php echo $data['pangkat_guru']?>" readonly>
+					<input type="text" name="pangkat_guru" class="form-control" id="pangkat_guru2" value="<?php echo $data['pangkat_guru']?>">
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<div class="form-group mb-3">
-						<input type="text" name="golongan_guru" class="form-control" id="golongan_guru2" value="<?php echo $data['golongan_guru']?>" readonly>
+						<input type="text" name="golongan_guru" class="form-control" id="golongan_guru2" value="<?php echo $data['golongan_guru']?>">
 				</div>
             </div>
         </div>
+
 
         <!-- Jabatan dan Jenis Surat Tugas -->
         <div class="form-group row">
@@ -683,7 +697,7 @@ include '_header.php';
          <h6 class="m-0 font-weight-bold mb-3">13. Isi Surat</h6>
 	     <div class="form-group row">
 			<div class="form-group mb-3">
-				<textarea class="form-control" id="isi_surat" name="isi_surat" rows="5"><?php echo $data['isi_surat']?>"</textarea>
+				<textarea class="form-control" id="isi_surat" name="isi_surat" rows="5"><?php echo $data['isi_surat']?></textarea>
 			</div>
         </div>
         
@@ -878,7 +892,14 @@ include '_header.php';
 	  <?php if($data['tgl_selesai'] == '0000-00-00'){?>
 	  <strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?><br>
 	  <?php }else{?>
-		<strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?> s.d. <?php echo $hari[$tgl2]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?> s.d. <?php echo tgl_indo($data['tgl_penutupan'])?><br>
+		<strong>Hari/Tanggal : </strong><?php echo $hari[$tgl]?> s.d. <?php echo $hari[$tgl2]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?> s.d. 
+		<?php if($data['tgl_penutupan'] == '0000-00-00'){
+			echo tgl_indo($data['tgl_selesai']);
+		}else if($data['tgl_selesai'] == '0000-00-00'){ 
+			 echo tgl_indo($data['tgl_penutupan']);
+		}else{
+			echo tgl_indo($data['tgl_penutupan']);
+		}?><br>
 	  <?php }?>
 	  <?php if($data['mulai_kegiatan'] == '' && $data['sampai_kegiatan'] == ''){?>
 		<strong>Pembukaan : </strong><?php echo $hari[$tgl]?>, <?php echo tgl_indo($data['tgl_kegiatan'])?>, Pukul <?php echo $data['jam_pembukaan']?><br>
@@ -891,7 +912,11 @@ include '_header.php';
 		<?php }?>
 	<?php }?>
 		<strong>Tempat Kegiatan : </strong><?php echo ($data['tempat'])?><br>
-		<strong>Jalan : </strong><?php echo ($data['jalan'])?>
+		<?php if($data['jalan'] == '' || $data['jalan'] == '-'){
+		echo '';
+		} else {
+			echo '<strong>Jalan : </strong>'.$data['jalan'];
+		}?><br>
 		<hr>
 	<h5>Yakin ingin menghapus Surat Tugas Guru - <strong><?php echo $data['nama_guru']?> - Nomor Surat 094/<?php echo $data['no_surat']?></strong> ?</h5>
 	<div class="modal-footer">
@@ -928,6 +953,7 @@ include '_header.php';
                 <th>Pangkat / Golongan</th>
                 <th>Jenis Surat Tugas</th>
                 <th>Tanggal</th>
+                <th>Pembuat Surat</th>
                 <th></th>
             </tr>
         </tfoot>
@@ -944,6 +970,21 @@ include '_header.php';
 <br>
 <br>
 <br>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('input[name="choose"]').click(function() 
+											{
+				var value = $(this).val();
+				if( value == "tidak_ada2")
+				{
+				$('#dasar_surat2').hide();
+				}
+				else{
+				$('#dasar_surat2').show();
+				}
+			});
+			});
+		</script>
 
 <script>
 		$(function() {
@@ -973,45 +1014,34 @@ include '_header.php';
 
 <script>
 		$(function() {
-			$("#guru2").change(function(){
-				var nama_guru = $("#guru2").val();
+			$("#nama_guru2").change(function(){
+				var nama_guru2 = $("#nama_guru2").val();
  
 				$.ajax({
 					url: 'ajax_surgas.php',
 					type: 'POST',
 					dataType: 'json',
 					data: {
-						'nama_guru': nama_guru
+						'nama_guru': nama_guru2
 					},
-					success: function (data_guru) {
-						if(data_guru['nip_guru'] == '-'){
+					success: function (data_guru2) {
+						if(data_guru2['nip_guru'] == '-'){
 						$("#nip_guru2").val('-');
 						} else{
-							$("#nip_guru2").val(data_guru['nip_guru']);
+							$("#nip_guru2").val(data_guru2['nip_guru']);
 						}
-						$("#pangkat_guru2").val(data_guru['pangkat_guru']);
-						$("#golongan_guru2").val(data_guru['golongan_guru']);
+						$("#pangkat_guru2").val(data_guru2['pangkat_guru']);
+						$("#golongan_guru2").val(data_guru2['golongan_guru']);
 					}
 				});
 			});
 		});
 	</script>
+
+
+
 	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('input[name="choose"]').click(function() 
-											{
-				var value = $(this).val();
-				if( value == "tidak_ada2")
-				{
-				$('#dasar_surat2').hide();
-				}
-				else{
-				$('#dasar_surat2').show();
-				}
-			});
-			});
-		</script>
+	
 
 <script>
 	$(document).ready(function () {

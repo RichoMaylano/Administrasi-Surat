@@ -64,6 +64,15 @@ $(document).ready(function() {
 });
 </script>
 
+<script>	
+$(document).ready(function() {
+  $("#nama_lengkap2").select2({
+	width: '100%',
+    dropdownParent: $("#add_panggilan")
+  });
+});
+</script>
+
 
 
 <!-- Notifikasi Pesan Surat Keterangan -->

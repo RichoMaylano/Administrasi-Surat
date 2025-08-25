@@ -122,6 +122,7 @@ if(isset($_SESSION['logged']) && !empty($_SESSION['logged'])){
 			  <li><a class="dropdown-item" href="rekomendasi.php"><i class="fa-solid fa-envelope-circle-check"></i>&nbsp Surat Rekomendasi</a></li>
 			  <li><a class="dropdown-item" href="homevisit.php"><i class="fa-solid fa-house-chimney-user"></i>&nbsp Home Visit</a></li>
 			  <li><a class="dropdown-item" href="surgas_guru.php"><i class="fa-solid fa-truck-fast"></i>&nbsp Surat Tugas Guru</a></li>
+			  <li><a class="dropdown-item" href="panggilan.php"><i class="fa-solid fa-phone-volume"></i>&nbsp Surat Panggilan</a></li>
 				<!-- <li><a class="dropdown-item" href="dkv.php"><i class="fa-solid fa-palette"></i>&nbsp Desain Komunikasi Visual</a></li>
 				<li><a class="dropdown-item" href="kul.php"><i class="fa-solid fa-bread-slice"></i>&nbsp Kuliner</a></li>
 				<li><a class="dropdown-item" href="ps.php"><i class="fa-solid fa-house-medical"></i>&nbsp Pekerjaan Sosial</a></li>

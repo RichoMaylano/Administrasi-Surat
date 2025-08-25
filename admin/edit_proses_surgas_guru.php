@@ -30,18 +30,20 @@ $jam_penutupan = $_POST['jam_penutupan'];
 $tempat = $_POST['tempat'];
 $jalan = $_POST['jalan'];
 $jenis_surgas = $_POST['jenis_surgas'];
+$status_cetak = $_POST['status_cetak'];
+$pejabat_ttd = $_POST['pejabat_ttd'];
 date_default_timezone_set('Asia/Jakarta');
 $date = date("Y-m-d H:i:s");
 
 if(isset($_POST['submit'])){
-    $sql = "UPDATE surgas_guru SET no_surat='$no_surat', no_surat_sppd='$no_surat_sppd', tujuan_sppd='$tujuan_sppd',tempat_sppd='$tempat_sppd',mata_anggaran='$mata_anggaran',nama_guru='$nama_guru',nip_guru='$nip_guru',pangkat_guru='$pangkat_guru',golongan_guru='$golongan_guru',jabatan='$jabatan',dasar_surat='$dasar_surat',isi_surat='$isi_surat',tgl_kegiatan='$tgl_kegiatan',mulai_kegiatan='$mulai_kegiatan',sampai_kegiatan='$sampai_kegiatan',tgl_selesai='$tgl_selesai',tgl_pembukaan='$tgl_pembukaan',jam_pembukaan='$jam_pembukaan',tgl_penutupan='$tgl_penutupan',jam_penutupan='$jam_penutupan',tempat='$tempat',jalan='$jalan',jenis_surgas='$jenis_surgas',tgl_create='$date' WHERE id_surat='$id_surat'";
+    $sql = "UPDATE surgas_guru SET no_surat='$no_surat', no_surat_sppd='$no_surat_sppd', tujuan_sppd='$tujuan_sppd',tempat_sppd='$tempat_sppd',mata_anggaran='$mata_anggaran',nama_guru='$nama_guru',nip_guru='$nip_guru',pangkat_guru='$pangkat_guru',golongan_guru='$golongan_guru',jabatan='$jabatan',dasar_surat='$dasar_surat',isi_surat='$isi_surat',tgl_kegiatan='$tgl_kegiatan',mulai_kegiatan='$mulai_kegiatan',sampai_kegiatan='$sampai_kegiatan',tgl_selesai='$tgl_selesai',tgl_pembukaan='$tgl_pembukaan',jam_pembukaan='$jam_pembukaan',tgl_penutupan='$tgl_penutupan',jam_penutupan='$jam_penutupan',tempat='$tempat',jalan='$jalan',jenis_surgas='$jenis_surgas', status_cetak='$status_cetak', pejabat_ttd='$pejabat_ttd' ,tgl_create='$date' WHERE id_surat='$id_surat'";
     $result = mysqli_query($db_conn, $sql);
     if(!$result){ 
        die('Could not update data: '.  mysqli_error()); 
     } else{ 
-        $_SESSION['edit_msg'] = 'Data berhasil diupdate';
+        $_SESSION['msg'] = '<strong>DATA BERHASIL DIUPDATE !</strong>';
     } 
     } 
      
-    header("location: surgas_guru.php");
+    header("location: surat_tugas_guru.php");
     ?>

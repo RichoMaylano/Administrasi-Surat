@@ -10,25 +10,31 @@ $kelas = $_POST['kelas'];
 $tempat_lahir = $_POST['tempat_lahir'];
 $ttl = $_POST['ttl'];
 $nama_ortu = $_POST['nama_ortu'];
+$alamat = $_POST['alamat'];
 $deskripsi = $_POST['deskripsi'];
 $penutup_surat = $_POST['penutup_surat'];
+$status_cetak = $_POST['status_cetak'];
+$pejabat_ttd = $_POST['pejabat_ttd'];
 date_default_timezone_set('Asia/Jakarta');
 $date = date("Y-m-d H:i:s");
+$tgl_surat = $_POST['tgl_surat'];
+$jenis_rekomendasi = $_POST['jenis_rekomendasi'];
+$creator = $_SESSION['nama_lengkap'];
 
 if(isset($_POST['submit'])){
 $query = mysqli_query($db_conn, "SELECT no_surat FROM rekomendasi WHERE no_surat = '$no_surat'");
 if($query->num_rows > 0) {
     $_SESSION['id_sama'] = 'Nomor Surat Sudah Terdaftar';
    } else {
-$sql = "INSERT INTO rekomendasi VALUES ('', '$no_surat', '$nama_lengkap', '$nis', '$nisn', '$kelas', '$tempat_lahir, $ttl', '$nama_ortu', '$deskripsi', '$penutup_surat', '$date')";
+$sql = "INSERT INTO rekomendasi VALUES ('', '$no_surat', '$nama_lengkap', '$nis', '$nisn', '$kelas', '$tempat_lahir, $ttl', '$nama_ortu', '$alamat', '', '', '', '', '', '', '', '', '', '', '', '', '$deskripsi', '$penutup_surat', '$status_cetak', '$pejabat_ttd', '$date', '$tgl_surat', '', '$jenis_rekomendasi', '$creator')";
 $result = mysqli_query($db_conn, $sql);
 if(!$result){ 
    die('Could not update data: '.  mysqli_error()); 
 } else{ 
-    $_SESSION['add_msg'] = 'Data berhasil ditambahkan';
+    $_SESSION['msg'] = '<strong>DATA BERHASIL DITAMBAHKAN !</strong>';
 } 
 } 
 } 
  
-header("location: rekomendasi.php");
+header("location: surat_rekomendasi.php");
 ?>

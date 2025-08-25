@@ -279,7 +279,7 @@ include '_header.php';
 ?>
 
 <!-- Table -->
-	  <div style="overflow-x:none">
+	  <div style="overflow:auto">
             <table id="example" class="table" style="width:100%">
         <thead>
             <tr>
@@ -289,6 +289,7 @@ include '_header.php';
                 <th>Wali Kelas</th>
                 <th>Guru BP/BK</th>
                 <th>Tanggal</th>
+                <th>Pembuat Surat</th>
                 <th></th>
             </tr>
         </thead>
@@ -305,9 +306,10 @@ include '_header.php';
 					echo '<td>'.$data['nama_walikelas'].'('.$data['kelas'].')</td>';
 					echo '<td>'.$data['nama_bk'].'</td>';
 					echo '<td>'.indo($data['tgl_buat']).'</td>';
+					echo '<td>'.$data['creator'].'</td>';
 					echo '<td>
 					<div class="btn-group">
-  					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+  					<button type="button" class="btn btn-warning text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					Aksi
 					</button> 
   					<ul class="dropdown-menu">
@@ -325,7 +327,7 @@ include '_header.php';
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-warning text-white">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pen-to-square"></i> &nbspEdit Surat Keterangan <strong>800/<?php echo $data['no_surat']?> - <?php echo $data['nama_lengkap']?></strong></h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pen-to-square"></i> &nbspEdit Surat Homevisit <strong>094/<?php echo $data['no_surat']?> - <?php echo $data['nama_lengkap']?></strong></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -386,7 +388,7 @@ include '_header.php';
          <h6 class="m-0 font-weight-bold mb-3">5. Kelas</h6>
 	     <div class="form-group row">
 			<div class="form-group mb-3">
-					<input type="text" name="kelas" class="form-control" id="kelas2" value="<?php echo $data['kelas']?>" readonly>
+					<input type="text" name="kelas" class="form-control" id="kelas2" value="<?php echo $data['kelas']?>">
             <div id="emailHelp" class="form-text text-danger"><strong>Contoh : XII KUL 1</strong></div>
 			</div>
         </div>
@@ -608,6 +610,7 @@ include '_header.php';
                 <th>Wali Kelas</th>
                 <th>Guru BP/BK</th>
                 <th>Tanggal</th>
+                <th>Pembuat Surat</th>
                 <th></th>
             </tr>
         </tfoot>
